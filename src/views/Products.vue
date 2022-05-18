@@ -1,5 +1,5 @@
 <template>
-  <div>products</div>
+  <div><h3>Products</h3></div>
   <div class="row">
     <div class="col m12">
       <table class="table bordered striped">
@@ -14,40 +14,105 @@
           </tr>
         </thead>
         <tbody>
-            <tr v-for="products in products" v-bind:key="products"></tr>
-            <td>{{products.Id}}</td>
-            <td>{{products.ProductName}}</td>
-            <td>{{products.Description}}</td>
-            <td>{{products.Stock}}</td>
-            <td>{{products.Price}}</td>
-            <td>{{products.Category}}</td>
-            <td class="center"><a href="#!">Delete</a></td>
-
+          <tr v-for="item in this.products" :key="item.id">
+            <td>{{ item.id }}</td>
+            <td>{{ item.productName }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.stock }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.category }}</td>
+          </tr>
         </tbody>
       </table>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col m12 card-panel">
+      <form @submit.prevent="iniciarSesion">
+        <div class="row">
+          <div class="col m3">
+            <label>ProductName</label>
+            <input type="text" v-model="formProduct.productName" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col m3">
+            <label>Description</label>
+            <input type="Text" v-model="formProduct.description" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col m3">
+            <label>Stock</label>
+            <input type="0" v-model="formProduct.stock" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col m3">
+            <label>Price</label>
+            <input type=0 v-model="formProduct.price" />
+          </div>
+        </div>
+        <div class="row">
+            <div class="col m3">
+              <label>Category</label>
+              <input type="Text" v-model="formProduct.category" />
+            </div>
+        </div>
+      </form>
+    </div>
+  </div>
+    
+            <button Class="btn btn-success" @click="createProducts">Add</button>
 </template>
 
 <script>
+import ProductHelper from "../helpers/products-helpers.js";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Products",
+  mounted() {
+    this.getProducts();
+    this.formProduct = {}
+  },
   data() {
     return {
       products: [],
-      ProductName: "",
-      Description:"",
-      Stock:"",
-      Price:0,
-      Category:""
+      formProduct: {
+          productName:"",
+          description:"",
+          stock:"",
+          price:"",
+          category:"",
 
+      } 
     };
   },
-  async mounted() {
-    await this.axios.get("https://localhost:7090/swagger/index.html").then((response) => {
-      this.products = response.data;
-    });
+  methods: {
+    getProducts() {
+      ProductHelper.getAll()
+        .then((response) => {
+          this.products = response.data;
+          console.log(this.products);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+    createProducts() {
+        console.log("product")
+        // eslint-disable-next-line no-debugger
+        let extraterestre = JSON.parse(JSON.stringify(this.formProduct))
+        ProductHelper.create(extraterestre)
+        .then((response) => {
+          this.products = response.data;
+          console.log(response)
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
   },
 };
 </script>

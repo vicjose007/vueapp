@@ -32,7 +32,7 @@
         </div>
         <div class="row">
           <div class="col m3">
-            <b>Category</b>
+            <b>CategoryId</b>
             <input type="Text" v-model="formProduct.productcategoryId" />
           </div>
         </div>
@@ -51,7 +51,7 @@
             <th>Description</th>
             <th>Stock</th>
             <th>Price</th>
-            <th>Category</th>
+            <th>CategoryId</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -62,7 +62,7 @@
             <td>{{ item.description }}</td>
             <td>{{ item.stock }}</td>
             <td>{{ item.price }}</td>
-            <td>{{ item.productcategoryId }}</td>
+            <td>{{ item.productCategoryId }}</td>
             <td>
               <button
                 Class="btn btn-danger btn-small"
@@ -95,7 +95,7 @@ export default {
         description: "",
         stock: "",
         price: "",
-        productcategoryId: "",
+        productCategoryId: "",
       },
     };
   },
@@ -120,6 +120,8 @@ export default {
         .catch((e) => {
           console.log(e);
         });
+
+        this.getProducts()
 
       location.reload();
     },

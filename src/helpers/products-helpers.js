@@ -5,14 +5,14 @@ class ProductHelper {
     }
     create(data){
         // eslint-disable-next-line no-debugger
-        return http.post("/Product", data)
+        return http.post("/Product", data, {headers: {'Authorization': `bearer ${sessionStorage.getItem("Token")}`}})
     }
     delete(value){
         // eslint-disable-next-line no-debugger
         debugger
         return http.delete("/Product",{
-            data:value
-        })
+        data:value, 
+        }, {headers: {'Authorization': `bearer ${sessionStorage.getItem("Token")}`}})
     }
 }
 

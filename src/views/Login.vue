@@ -41,10 +41,17 @@ export default {
     async LoginUser(){
       const res = await usersHelpers.LoginUser({name:this.User,password:this.password})
       if(res.status){
+
+        sessionStorage.setItem('Token', res.data)
+        sessionStorage.getItem('Token')
+
+
         router.push({path:"/Products"})
       }else{
         console.log("el usuario no existe")
       }
+      
+      
     }
     
   },

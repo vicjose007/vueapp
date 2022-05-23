@@ -1,4 +1,7 @@
 <template>
+  <nav>
+    <li><router-link to="/Products">Create Product</router-link></li>
+  </nav>
   <div class="row">
     <div class="col m12 card-panel">
       <form @submit.prevent="CreateCategory">
@@ -21,6 +24,7 @@
           <tr>
             <th>Category</th>
             <th>Id</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>

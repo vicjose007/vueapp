@@ -5,8 +5,14 @@ class ProductHelper {
     }
     create(data){
         // eslint-disable-next-line no-debugger
-        debugger
         return http.post("/Product", data)
+    }
+    delete(value){
+        // eslint-disable-next-line no-debugger
+        debugger
+        return http.delete("/Product",{
+            data:value
+        })
     }
 }
 

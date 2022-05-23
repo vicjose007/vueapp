@@ -1,16 +1,58 @@
 <template>
-  <div><h3>Products</h3></div>
+  <nav>
+    <li><router-link to="/ProductCategory">Create Category</router-link></li>
+  </nav>
+  <div><h4>Products</h4></div>
+  <div class="row">
+    <div class="col m8 card-panel #e8eaf6 indigo lighten-5">
+      <form @submit.prevent="iniciarSesion">
+        <div class="row">
+          <div class="col m3">
+            <b>Product Name</b>
+            <input type="text" v-model="formProduct.productName" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col m3">
+            <b>Description</b>
+            <input type="Text" v-model="formProduct.description" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col m3">
+            <b>Stock</b>
+            <input type="Text" v-model="formProduct.stock" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col m3">
+            <b>Price</b>
+            <input type="Text" v-model="formProduct.price" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col m3">
+            <b>Category</b>
+            <input type="Text" v-model="formProduct.productcategoryId" />
+          </div>
+        </div>
+        <button Class="btn btn-success" @click="createProducts">Add</button>
+      </form>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col m12">
-      <table class="table bordered striped">
+      <table class="table bordered striped #e3f2fd blue lighten-5">
         <thead>
           <tr>
             <th>Id</th>
-            <th>ProductName</th>
+            <th>Product Name</th>
             <th>Description</th>
             <th>Stock</th>
             <th>Price</th>
             <th>Category</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -20,51 +62,20 @@
             <td>{{ item.description }}</td>
             <td>{{ item.stock }}</td>
             <td>{{ item.price }}</td>
-            <td>{{ item.category }}</td>
+            <td>{{ item.productcategoryId }}</td>
+            <td>
+              <button
+                Class="btn btn-danger btn-small"
+                @click="deleteProducts(item)"
+              >
+                Delete
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col m12 card-panel">
-      <form @submit.prevent="iniciarSesion">
-        <div class="row">
-          <div class="col m3">
-            <label>ProductName</label>
-            <input type="text" v-model="formProduct.productName" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col m3">
-            <label>Description</label>
-            <input type="Text" v-model="formProduct.description" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col m3">
-            <label>Stock</label>
-            <input type="0" v-model="formProduct.stock" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col m3">
-            <label>Price</label>
-            <input type=0 v-model="formProduct.price" />
-          </div>
-        </div>
-        <div class="row">
-            <div class="col m3">
-              <label>Category</label>
-              <input type="Text" v-model="formProduct.category" />
-            </div>
-        </div>
-      </form>
-    </div>
-  </div>
-    
-            <button Class="btn btn-success" @click="createProducts">Add</button>
 </template>
 
 <script>
@@ -74,19 +85,18 @@ export default {
   name: "Products",
   mounted() {
     this.getProducts();
-    this.formProduct = {}
+    this.formProduct = {};
   },
   data() {
     return {
       products: [],
       formProduct: {
-          productName:"",
-          description:"",
-          stock:"",
-          price:"",
-          category:"",
-
-      } 
+        productName: "",
+        description: "",
+        stock: "",
+        price: "",
+        productcategoryId: "",
+      },
     };
   },
   methods: {
@@ -101,17 +111,32 @@ export default {
         });
     },
     createProducts() {
-        console.log("product")
-        // eslint-disable-next-line no-debugger
-        let extraterestre = JSON.parse(JSON.stringify(this.formProduct))
-        ProductHelper.create(extraterestre)
+      // eslint-disable-next-line no-debugger
+      let convert = JSON.parse(JSON.stringify(this.formProduct));
+      ProductHelper.create(convert)
         .then((response) => {
-          this.products = response.data;
-          console.log(response)
+          console.log(response);
         })
         .catch((e) => {
           console.log(e);
         });
+
+      location.reload();
+    },
+    deleteProducts(data) {
+      // eslint-disable-next-line no-debugger
+      debugger;
+      let convert = JSON.parse(JSON.stringify(data));
+      ProductHelper.delete(convert)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
+      location.reload();
+      return null;
     },
   },
 };

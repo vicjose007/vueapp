@@ -2,7 +2,6 @@
   <nav>
     <div class="nav-wrapper teal">
       <ul class="right hide-on-med-and-down">
-        <li><router-link to="/Products">Products</router-link></li>
         <li><router-link to="/Login">Login</router-link></li>
       </ul>
     </div>

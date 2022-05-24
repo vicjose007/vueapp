@@ -2,6 +2,7 @@
   <nav>
     <li><router-link to="/ProductCategory">Create Category</router-link></li>
   </nav>
+  <nav>    <li><router-link to="/Order">Create Order</router-link></li></nav>
   <div><h4>Products</h4></div>
   <div class="row">
     <div class="col m8 card-panel #e8eaf6 indigo lighten-5">

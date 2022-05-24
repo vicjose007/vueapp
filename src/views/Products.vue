@@ -1,43 +1,62 @@
 <template>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
   <nav>
-    <li><router-link to="/ProductCategory">Create Category</router-link></li>
+    <li>
+      <router-link to="/ProductCategory"
+        ><i class="fa-solid fa-circle-plus"></i> Create Category</router-link
+      >
+    </li>
   </nav>
-  <nav>    <li><router-link to="/Order">Create Order</router-link></li></nav>
-  <div><h4>Products</h4></div>
+  <nav>
+    <li>
+      <router-link to="/Order"
+        ><i class="fa-solid fa-circle-plus"></i> Create Order</router-link
+      >
+    </li>
+  </nav>
+  <div><h4> <i class="fa-brands fa-product-hunt"></i> Products</h4></div>
   <div class="row">
     <div class="col m8 card-panel #e8eaf6 indigo lighten-5">
       <form @submit.prevent="iniciarSesion">
         <div class="row">
           <div class="col m3">
-            <b>Product Name</b>
+            <b><i class="fa-solid fa-pencil"></i> Product Name</b>
             <input type="text" v-model="formProduct.productName" />
           </div>
         </div>
         <div class="row">
           <div class="col m3">
-            <b>Description</b>
+            <b><i class="fa-solid fa-pencil"></i> Description</b>
             <input type="Text" v-model="formProduct.description" />
           </div>
         </div>
         <div class="row">
           <div class="col m3">
-            <b>Stock</b>
+            <b><i class="fa-solid fa-pencil"></i> Stock</b>
             <input type="Text" v-model="formProduct.stock" />
           </div>
         </div>
         <div class="row">
           <div class="col m3">
-            <b>Price</b>
+            <b><i class="fa-solid fa-pencil"></i> Price</b>
             <input type="Text" v-model="formProduct.price" />
           </div>
         </div>
         <div class="row">
           <div class="col m3">
-            <b>CategoryId</b>
+            <b> <i class="fa-solid fa-pencil"></i> Category Id</b>
             <input type="Text" v-model="formProduct.productcategoryId" />
           </div>
         </div>
-        <button Class="btn btn-success" @click="createProducts">Add</button>
+        <button Class="btn btn-success" @click="createProducts"> <i class="fa-solid fa-circle-check"></i> Add</button>
       </form>
     </div>
   </div>
@@ -47,13 +66,13 @@
       <table class="table bordered striped #e3f2fd blue lighten-5">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Product Name</th>
-            <th>Description</th>
-            <th>Stock</th>
-            <th>Price</th>
-            <th>CategoryId</th>
-            <th>Actions</th>
+            <th><i class="fa-solid fa-clipboard-list"></i> Id</th>
+            <th><i class="fa-solid fa-clipboard-list"></i> Product Name</th>
+            <th><i class="fa-solid fa-clipboard-list"></i> Description</th>
+            <th><i class="fa-solid fa-clipboard-list"></i> Stock</th>
+            <th><i class="fa-solid fa-clipboard-list"></i> Price</th>
+            <th><i class="fa-solid fa-clipboard-list"></i> Category Id</th>
+            <th><i class="fa-solid fa-clipboard-list"></i> Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -68,7 +87,7 @@
               <button
                 Class="btn btn-danger btn-small"
                 @click="deleteProducts(item)"
-              >
+              ><i class="fa-solid fa-circle-minus"></i>
                 Delete
               </button>
             </td>
@@ -122,7 +141,7 @@ export default {
           console.log(e);
         });
 
-        this.getProducts()
+      this.getProducts();
 
       location.reload();
     },

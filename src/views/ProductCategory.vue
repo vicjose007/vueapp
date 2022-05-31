@@ -14,11 +14,6 @@
         ><i class="fa-solid fa-circle-plus"></i> Create Product</router-link
       >
     </li>
-    <li>
-      <router-link to="/Order"
-        ><i class="fa-solid fa-circle-plus"></i> Create Order</router-link
-      >
-    </li>
   </nav>
   <div class="row">
     <div class="col m12 card-panel">
@@ -91,6 +86,7 @@ export default {
         .catch((e) => {
           console.log(e);
         });
+        
     },
     createProductsCategory() {
       // eslint-disable-next-line no-debugger

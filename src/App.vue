@@ -25,7 +25,29 @@
 </template>
 
 <script>
+import CallForLoginOrHandleRedirect from './config/azure-ad/settings'
+
+
+  function onLoggedin(tokenResponse) {
+    localStorage.setItem('token', tokenResponse.accessToken);
+    localStorage.setItem('ad_username', tokenResponse.account.username);
+    this.$store.dispatch("onLogginOcurred", {
+      accessToken: tokenResponse.accessToken,
+      userName: tokenResponse.account.name,
+      email: tokenResponse.account.username,
+    });
+    // eslint-disable-next-line no-unused-vars
+    this.userService.getCurrentUser().then(async (response)=>{
+
+    });
+
+  }
+
+
 export default {
-  name: "App",
+
+  created() {
+    return CallForLoginOrHandleRedirect(onLoggedin)
+  }
 };
 </script>

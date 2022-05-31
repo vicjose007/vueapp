@@ -143,7 +143,7 @@ export default {
 
       this.getProducts();
 
-      location.reload();
+
     },
     deleteProducts(data) {
       // eslint-disable-next-line no-debugger
@@ -157,7 +157,7 @@ export default {
           console.log(e);
         });
 
-      location.reload();
+      //location.reload();
       return null;
     },
   },
